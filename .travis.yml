@@ -1,0 +1,49 @@
+language: rust
+
+jobs:
+  include:
+  - rust: stable
+    os: linux
+  - rust: 1.34.0
+    os: linux
+  - rust: stable
+    os: osx
+  - rust: stable-msvc
+    os: windows
+  # Due to various issues surrounding MinGW and networking,
+  # it's not feasible to build against the GNU ABI for Windows
+
+cache:
+  - cargo
+
+before_script:
+  - rustup show
+  # CMake doesn't like the `sh.exe` provided by Git being in PATH
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm "C:/Program Files/Git/usr/bin/sh.exe"; fi
+  - rustup component add clippy
+  - rustup component add rustfmt
+
+script:
+  - cargo clippy --all
+  - cargo fmt --all -- --check
+
+  # For default build, split up compilation and tests so we can track build times
+  - cargo test --no-run
+  - cargo test
+  - cargo test --release --no-run
+  - cargo test --release
+
+  # Run tests using static linking
+  - cd "$TRAVIS_BUILD_DIR/libaeron-sys"
+  - cargo test --features "static"
+
+  - cd "$TRAVIS_BUILD_DIR/libaeron_driver-sys"
+  - cargo test --features "static"
+
+
+branches:
+  only:
+    - master
+    - staging
+    - trying
+    
