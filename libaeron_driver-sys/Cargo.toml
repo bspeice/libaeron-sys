@@ -1,6 +1,6 @@
 [package]
 name = "libaeron_driver-sys"
-version = "0.1.0"
+version = "1.0.0+1.28.0"
 authors = ["Bradlee Speice <bradlee@speice.io>"]
 edition = "2018"
 
@@ -9,7 +9,7 @@ edition = "2018"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.51"
+bindgen = "0.54"
 cmake = "0.1"
 dunce = "1.0"
 
