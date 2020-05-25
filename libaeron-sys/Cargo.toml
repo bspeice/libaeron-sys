@@ -15,4 +15,4 @@ dunce = "1.0"
 static = []
 
 [badges]
-travis-ci = "bspeice/libaeron-sys"
+travis-ci = { repository = "bspeice/libaeron-sys" }
