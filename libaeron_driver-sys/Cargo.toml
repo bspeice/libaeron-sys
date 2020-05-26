@@ -2,7 +2,12 @@
 name = "libaeron_driver-sys"
 version = "1.0.0+1.28.0"
 authors = ["Bradlee Speice <bradlee@speice.io>"]
+repository = "https://github.com/bspeice/libaeron-sys"
+documentation = "https://docs.rs/libaeron_driver-sys"
+description = "Rust bindings for the Aeron Media Driver"
+license = "apache-2.0"
 edition = "2018"
+readme = "README.md"
 
 [dependencies]
 
