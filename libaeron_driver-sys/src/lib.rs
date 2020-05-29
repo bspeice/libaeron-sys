@@ -14,6 +14,6 @@ mod tests {
         let patch = unsafe { crate::aeron_version_patch() };
         assert_eq!(major, 1);
         assert_eq!(minor, 28);
-        assert_eq!(patch, 0);
+        assert_eq!(patch, 2);
     }
 }
