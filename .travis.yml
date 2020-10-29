@@ -10,6 +10,9 @@ jobs:
     os: osx
   - rust: stable-msvc
     os: windows
+    env:
+      JAVA_HOME="$HOME/jdk"
+
   # Due to various issues surrounding MinGW and networking,
   # it's not feasible to build against the GNU ABI for Windows
 
@@ -18,16 +21,19 @@ cache:
 
 before_script:
   - rustup show
-  # CMake doesn't like the `sh.exe` provided by Git being in PATH
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then rm "C:/Program Files/Git/usr/bin/sh.exe"; fi
   - rustup component add clippy
   - rustup component add rustfmt
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+        # CMake doesn't like the `sh.exe` provided by Git being in PATH
+        rm "C:/Program Files/Git/usr/bin/sh.exe"
+
+        # Travis CI Windows runners need to install a JDK
+        curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | \
+            JABBA_COMMAND="install 1.8 -o $JAVA_HOME" bash
+    fi
 
 script:
-  # CMake configuration requires that a JDK be available
-  - jdk_switcher use openjdk8
-
-  # Begin Rust build
   - cargo clippy --all
   - cargo fmt --all -- --check
 
