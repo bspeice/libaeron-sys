@@ -24,6 +24,10 @@ before_script:
   - rustup component add rustfmt
 
 script:
+  # CMake configuration requires that a JDK be available
+  - jdk_switcher use openjdk8
+
+  # Begin Rust build
   - cargo clippy --all
   - cargo fmt --all -- --check
 
