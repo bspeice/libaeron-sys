@@ -11,8 +11,9 @@ jobs:
   - rust: stable-msvc
     os: windows
     env:
-      JAVA_HOME="$HOME/jdk"
-
+      - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
+      - GRAVIS="$HOME/gravis"
+      - JDK="adopt@1.8.272-10"
   # Due to various issues surrounding MinGW and networking,
   # it's not feasible to build against the GNU ABI for Windows
 
@@ -29,8 +30,8 @@ before_script:
         rm "C:/Program Files/Git/usr/bin/sh.exe"
 
         # Travis CI Windows runners need to install a JDK
-        curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | \
-            JABBA_COMMAND="install 1.8 -o $JAVA_HOME" bash
+        git clone --depth 1 "$GRAVIS_REPO" "$GRAVIS"
+        source "$GRAVIS/install-jdk"
     fi
 
 script:
