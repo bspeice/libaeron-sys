@@ -13,7 +13,7 @@ jobs:
     env:
       - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
       - GRAVIS="$HOME/gravis"
-      - JDK="adopt@1.8.272"
+      - JDK="adopt@1.8.0-272"
   # Due to various issues surrounding MinGW and networking,
   # it's not feasible to build against the GNU ABI for Windows
 
