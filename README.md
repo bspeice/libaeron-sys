@@ -1,6 +1,5 @@
 # libaeron-sys
 
-[![travisci](https://travis-ci.org/bspeice/libaeron-sys.svg?branch=master)](https://travis-ci.org/bspeice/libaeron-sys)
 [![libaeron-sys docs.rs](https://docs.rs/libaeron-sys/badge.svg)](https://docs.rs/libaeron-sys/)
 
 Rust bindings for the [Aeron](https://github.com/real-logic/aeron) messaging bus. Two crates are provided; one for the [C Client API](./libaeron-sys) and one for the [C Media Driver](./libaeron_driver-sys).
