@@ -57,6 +57,11 @@ pub fn main() {
     }
 
     let cmake_output = Config::new(&aeron_path)
+        .define("BUILD_AERON_DRIVER", "OFF")
+        .define("BUILD_AERON_ARCHIVE_API", "OFF")
+        .define("AERON_TESTS", "OFF")
+        .define("AERON_BUILD_SAMPLES", "OFF")
+        .define("AERON_BUILD_DOCUMENTATION", "OFF")
         .build_target(link_type.target_name())
         .build();
 
