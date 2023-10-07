@@ -97,9 +97,9 @@ pub fn main() {
             aeron_path.join("aeron-client/src/main/c").display()
         ))
         .header("bindings.h")
-        .whitelist_function("aeron_.*")
-        .whitelist_type("aeron_.*")
-        .whitelist_var("AERON_.*")
+        .allowlist_function("aeron_.*")
+        .allowlist_type("aeron_.*")
+        .allowlist_var("AERON_.*")
         .constified_enum_module("aeron_.*_enum")
         // Some padding structures use arrays > 120 elements,
         // so we can't derive Debug implementations
