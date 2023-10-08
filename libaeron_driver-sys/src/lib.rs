@@ -12,8 +12,9 @@ mod tests {
         let major = unsafe { crate::aeron_version_major() };
         let minor = unsafe { crate::aeron_version_minor() };
         let patch = unsafe { crate::aeron_version_patch() };
-        assert_eq!(major, 1);
-        assert_eq!(minor, 40);
-        assert_eq!(patch, 0);
+
+        let aeron_version = format!("{}.{}.{}", major, minor, patch);
+        let cargo_version = env!("CARGO_PKG_VERSION").split("+").nth(1).unwrap();
+        assert_eq!(aeron_version, cargo_version);
     }
 }
