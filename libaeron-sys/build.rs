@@ -97,9 +97,9 @@ pub fn main() {
     let bindings = bindgen::Builder::default()
         .clang_arg(format!("-I{}", header_path.display()))
         .header("bindings.h")
-        .whitelist_function("aeron_.*")
-        .whitelist_type("aeron_.*")
-        .whitelist_var("AERON_.*")
+        .allowlist_function("aeron_.*")
+        .allowlist_type("aeron_.*")
+        .allowlist_var("AERON_.*")
         .constified_enum_module("aeron_.*_enum")
         .generate()
         .expect("Unable to generate aeron bindings");
