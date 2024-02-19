@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [master, staging, trying]
+  pull_request:
+    branches: [master]
+
+env:
+  RUST_BACKTRACE: 1
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        features: [default, static]
+        rust-version: ["stable", "stable 6 months ago"]
+
+    env:
+      feature-flags: ${{ matrix.features != 'default' && format('--features {0}', matrix.features) || '' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ matrix.rust-version }}
+          components: clippy, rustfmt
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Check clippy lints
+        run: cargo clippy --all ${{ env.feature-flags }} -- --deny warnings
+
+      - name: Build
+        run: cargo build --release --verbose ${{ env.feature-flags }}
+
+      - name: Test
+        run: cargo test --verbose ${{ env.feature-flags }}
