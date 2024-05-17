@@ -18,6 +18,3 @@ dunce = "1.0"
 
 [features]
 static = []
-
-[badges]
-travis-ci = { repository = "bspeice/libaeron-sys" }
