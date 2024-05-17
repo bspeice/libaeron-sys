@@ -1,6 +1,6 @@
 [package]
 name = "libaeron-sys"
-version = "1.42.1"
+version = "1.44.1"
 authors = ["Bradlee Speice <bradlee@speice.io>"]
 repository = "https://github.com/bspeice/libaeron-sys"
 documentation = "https://docs.rs/libaeron-sys"
