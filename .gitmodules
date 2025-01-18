@@ -4,3 +4,6 @@
 [submodule "libaeron_driver-sys/aeron"]
 	path = libaeron_driver-sys/aeron
 	url = https://github.com/real-logic/aeron.git
+[submodule "libaeron_archive_c_client-sys/aeron"]
+	path = libaeron_archive_c_client-sys/aeron
+	url = https://github.com/real-logic/aeron.git

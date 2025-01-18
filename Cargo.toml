@@ -2,4 +2,5 @@
 members = [
     "libaeron-sys",
     "libaeron_driver-sys",
+    "libaeron_archive_c_client-sys",
 ]
