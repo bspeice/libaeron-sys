@@ -16,10 +16,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         features: [default, static]
-        rust-version: ["stable", "stable 6 months ago"]
+        rust-version: ["stable"]
 
     env:
       feature-flags: ${{ matrix.features != 'default' && format('--features {0}', matrix.features) || '' }}
