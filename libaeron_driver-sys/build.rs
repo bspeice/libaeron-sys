@@ -1,3 +1,4 @@
+use bindgen::callbacks::{IntKind, ParseCallbacks};
 use cmake::Config;
 use dunce::canonicalize;
 use std::env;
@@ -28,6 +29,19 @@ impl LinkType {
         match self {
             LinkType::Dynamic => "aeron_driver",
             LinkType::Static => "aeron_driver_static",
+        }
+    }
+}
+
+#[derive(Debug)]
+struct Callbacks;
+
+impl ParseCallbacks for Callbacks {
+    fn int_macro(&self, name: &str, _value: i64) -> Option<IntKind> {
+        if name.starts_with("AERON_PUBLICATION_") {
+            Some(IntKind::I64)
+        } else {
+            None
         }
     }
 }
@@ -106,6 +120,7 @@ pub fn main() {
         .allowlist_type("aeron_.*")
         .allowlist_var("AERON_.*")
         .constified_enum_module("aeron_.*_enum")
+        .parse_callbacks(Box::new(Callbacks))
         // Some padding structures use arrays > 120 elements,
         // so we can't derive Debug implementations
         .derive_debug(false)
