@@ -15,7 +15,7 @@ update_codecs() {
     crate=$1
     echo "Generating codecs..."
     codec_dir="${crate}/generated/c"
-    git rm -rfq "${codec_dir}"
+    git rm -rfq --ignore-unmatch "${codec_dir}"
     (
         cd "${crate}/aeron" && \
             ./gradlew -Dcodec.target.dir="${codec_dir}" \
@@ -25,7 +25,7 @@ update_codecs() {
 }
 
 echo "Updating submodules..."
-git submodule update --init
+git submodule update --init --remote
 git submodule foreach git checkout "${version}"
 
 for crate in "${basedir}"/libaeron*-sys; do
