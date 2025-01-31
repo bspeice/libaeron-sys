@@ -1,3 +1,4 @@
+use bindgen::callbacks::{IntKind, ParseCallbacks};
 use cmake::Config;
 use dunce::canonicalize;
 use std::env;
@@ -28,6 +29,23 @@ impl LinkType {
         match self {
             LinkType::Dynamic => "aeron_archive_c_client",
             LinkType::Static => "aeron_archive_c_client_static",
+        }
+    }
+}
+
+#[derive(Debug)]
+struct Callbacks;
+
+impl ParseCallbacks for Callbacks {
+    fn int_macro(&self, name: &str, _value: i64) -> Option<IntKind> {
+        if name.starts_with("ARCHIVE_ERROR_CODE_") {
+            // Error code is signed
+            Some(IntKind::I32)
+        } else if name == "AERON_NULL_POSITION" {
+            // Default position
+            Some(IntKind::I64)
+        } else {
+            None
         }
     }
 }
@@ -64,7 +82,6 @@ pub fn main() {
         .define("AERON_TESTS", "OFF")
         .define("AERON_BUILD_SAMPLES", "OFF")
         .define("AERON_BUILD_DOCUMENTATION", "OFF")
-        .define("GRADLE_WRAPPER", "false")
         .build_target(link_type.target_name())
         .build();
 
@@ -109,6 +126,7 @@ pub fn main() {
         .allowlist_var("ARCHIVE_.*")
         .constified_enum_module("aeron_.*_en")
         .constified_enum_module("aeron_.*_enum")
+        .parse_callbacks(Box::new(Callbacks))
         .generate()
         .expect("Unable to generate aeron bindings");
 

@@ -39,6 +39,13 @@ struct Callbacks;
 impl ParseCallbacks for Callbacks {
     fn int_macro(&self, name: &str, _value: i64) -> Option<IntKind> {
         if name.starts_with("AERON_PUBLICATION_") {
+            // Return value of `aeron_publication_offer()` and the like
+            Some(IntKind::I64)
+        } else if name.starts_with("AERON_COUNTER_RECORD_") {
+            // `state` parameter of `aeron_counters_reader_counter_state()`
+            Some(IntKind::I32)
+        } else if name == "AERON_NULL_VALUE" {
+            // Used for default ids/position
             Some(IntKind::I64)
         } else {
             None
