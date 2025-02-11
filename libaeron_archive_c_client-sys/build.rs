@@ -1,8 +1,8 @@
 use bindgen::callbacks::{IntKind, ParseCallbacks};
 use cmake::Config;
 use dunce::canonicalize;
-use std::env;
 use std::path::{Path, PathBuf};
+use std::{env, fs};
 
 pub enum LinkType {
     Dynamic,
@@ -58,6 +58,7 @@ pub fn main() {
     let aeron_path = canonicalize(base_path.join("aeron")).unwrap();
     let client_header_path = aeron_path.join("aeron-client/src/main/c");
     let archive_header_path = aeron_path.join("aeron-archive/src/main/c");
+    let codec_path = base_path.join("generated");
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
 
     let link_type = LinkType::detect();
@@ -76,12 +77,37 @@ pub fn main() {
         }
     }
 
-    let cmake_output = Config::new(base_path)
+    // When Archive API is built, cmake calls out to Gradle to generate SBE codecs.
+    // This greatly complicates the build, especially since Gradle proceeds with
+    // downloading Java dependencies off the internet, which is not desirable.
+    // Let's replace gradlew with a no-op:
+    let dummy_gradle_wrapper = if cfg!(target_os = "windows") {
+        let cmd = out_path.join("true.bat");
+        fs::write(&cmd, "exit 0").unwrap();
+        cmd
+    } else {
+        "true".into()
+    };
+
+    // ...and instead, include pre-generated codecs
+    let mut c_config = cc::Build::new();
+    c_config.include(codec_path);
+
+    let cmake_output = Config::new(&aeron_path)
         .define("BUILD_AERON_DRIVER", "OFF")
         .define("BUILD_AERON_ARCHIVE_API", "ON")
         .define("AERON_TESTS", "OFF")
         .define("AERON_BUILD_SAMPLES", "OFF")
         .define("AERON_BUILD_DOCUMENTATION", "OFF")
+        .define("GRADLE_WRAPPER", dummy_gradle_wrapper)
+        .init_c_cfg(c_config)
+        // Since Java isn't required to build anymore, the executables can be set to obviously
+        // invalid values. This will prevent CMake from failing if a JDK isn't found.
+        .define("Java_JAR_EXECUTABLE", "DISABLED_FOR_LIBAERON_SYS")
+        .define("Java_JAVA_EXECUTABLE", "DISABLED_FOR_LIBAERON_SYS")
+        .define("Java_JAVAC_EXECUTABLE", "DISABLED_FOR_LIBAERON_SYS")
+        .define("Java_JAVAH_EXECUTABLE", "DISABLED_FOR_LIBAERON_SYS")
+        .define("Java_JAVADOC_EXECUTABLE", "DISABLED_FOR_LIBAERON_SYS")
         .build_target(link_type.target_name())
         .build();
 
@@ -89,7 +115,7 @@ pub fn main() {
     // For Linux/OSX, it's just build/lib
     // For Windows, the .lib file is in build/lib/{profile}, but the DLL
     // is shipped in build/binaries/{profile}
-    let base_lib_dir = cmake_output.join("build/aeron");
+    let base_lib_dir = cmake_output.join("build");
     println!(
         "cargo:rustc-link-search=native={}",
         base_lib_dir.join("lib").display()
