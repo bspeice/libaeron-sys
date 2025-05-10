@@ -5,6 +5,8 @@ authors = ["Bradlee Speice <bradlee@speice.io>"]
 repository = "https://github.com/bspeice/libaeron-sys"
 documentation = "https://docs.rs/libaeron-sys"
 description = "Rust bindings for the Aeron Client"
+categories = ["network-programming", "external-ffi-bindings"]
+keywords = ["aeron", "aeron-transport"]
 license = "Apache-2.0"
 edition = "2018"
 readme = "README.md"
@@ -12,7 +14,7 @@ readme = "README.md"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.68"
+bindgen = "0.69"
 cmake = "0.1"
 dunce = "1.0"
 
