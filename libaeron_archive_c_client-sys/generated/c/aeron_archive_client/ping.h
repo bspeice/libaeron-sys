@@ -1,7 +1,7 @@
 /* Generated SBE (Simple Binary Encoding) message codec */
 
-#ifndef _AERON_ARCHIVE_CLIENT_CLOSESESSIONREQUEST_H_
-#define _AERON_ARCHIVE_CLIENT_CLOSESESSIONREQUEST_H_
+#ifndef _AERON_ARCHIVE_CLIENT_PING_H_
+#define _AERON_ARCHIVE_CLIENT_PING_H_
 
 #include <errno.h>
 #if !defined(__STDC_LIMIT_MACROS)
@@ -121,7 +121,7 @@ SBE_ONE_DEF const char *sbe_strerror(const int errnum)
 }
 #endif
 
-struct aeron_archive_client_closeSessionRequest
+struct aeron_archive_client_ping
 {
     char *buffer;
     uint64_t buffer_length;
@@ -131,40 +131,40 @@ struct aeron_archive_client_closeSessionRequest
     uint64_t acting_version;
 };
 
-enum aeron_archive_client_closeSessionRequest_meta_attribute
+enum aeron_archive_client_ping_meta_attribute
 {
-    aeron_archive_client_closeSessionRequest_meta_attribute_EPOCH,
-    aeron_archive_client_closeSessionRequest_meta_attribute_TIME_UNIT,
-    aeron_archive_client_closeSessionRequest_meta_attribute_SEMANTIC_TYPE,
-    aeron_archive_client_closeSessionRequest_meta_attribute_PRESENCE
+    aeron_archive_client_ping_meta_attribute_EPOCH,
+    aeron_archive_client_ping_meta_attribute_TIME_UNIT,
+    aeron_archive_client_ping_meta_attribute_SEMANTIC_TYPE,
+    aeron_archive_client_ping_meta_attribute_PRESENCE
 };
 
-union aeron_archive_client_closeSessionRequest_float_as_uint
+union aeron_archive_client_ping_float_as_uint
 {
     float fp_value;
     uint32_t uint_value;
 };
 
-union aeron_archive_client_closeSessionRequest_double_as_uint
+union aeron_archive_client_ping_double_as_uint
 {
     double fp_value;
     uint64_t uint_value;
 };
 
-struct aeron_archive_client_closeSessionRequest_string_view
+struct aeron_archive_client_ping_string_view
 {
     const char* data;
     size_t length;
 };
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_sbe_position(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_sbe_position(
+    const struct aeron_archive_client_ping *const codec)
 {
     return codec->position;
 }
 
-SBE_ONE_DEF bool aeron_archive_client_closeSessionRequest_set_sbe_position(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF bool aeron_archive_client_ping_set_sbe_position(
+    struct aeron_archive_client_ping *const codec,
     const uint64_t position)
 {
     if (SBE_BOUNDS_CHECK_EXPECT((position > codec->buffer_length), false))
@@ -177,14 +177,14 @@ SBE_ONE_DEF bool aeron_archive_client_closeSessionRequest_set_sbe_position(
     return true;
 }
 
-SBE_ONE_DEF uint64_t *aeron_archive_client_closeSessionRequest_sbe_position_ptr(
-    struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF uint64_t *aeron_archive_client_ping_sbe_position_ptr(
+    struct aeron_archive_client_ping *const codec)
 {
     return &codec->position;
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_reset(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_reset(
+    struct aeron_archive_client_ping *const codec,
     char *buffer,
     const uint64_t offset,
     const uint64_t buffer_length,
@@ -196,7 +196,7 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
     codec->buffer_length = buffer_length;
     codec->acting_block_length = acting_block_length;
     codec->acting_version = acting_version;
-    if (!aeron_archive_client_closeSessionRequest_set_sbe_position(codec, offset + acting_block_length))
+    if (!aeron_archive_client_ping_set_sbe_position(codec, offset + acting_block_length))
     {
         return NULL;
     }
@@ -204,9 +204,9 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
     return codec;
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_copy(
-    struct aeron_archive_client_closeSessionRequest *const codec,
-    const struct aeron_archive_client_closeSessionRequest *const other)
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_copy(
+    struct aeron_archive_client_ping *const codec,
+    const struct aeron_archive_client_ping *const other)
 {
      codec->buffer = other->buffer;
      codec->offset = other->offset;
@@ -218,46 +218,46 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
      return codec;
 }
 
-SBE_ONE_DEF uint16_t aeron_archive_client_closeSessionRequest_sbe_block_length(void)
+SBE_ONE_DEF uint16_t aeron_archive_client_ping_sbe_block_length(void)
 {
     return (uint16_t)8;
 }
 
-#define AERON_ARCHIVE_CLIENT_CLOSE_SESSION_REQUEST_SBE_TEMPLATE_ID (uint16_t)3
+#define AERON_ARCHIVE_CLIENT_PING_SBE_TEMPLATE_ID (uint16_t)106
 
-SBE_ONE_DEF uint16_t aeron_archive_client_closeSessionRequest_sbe_template_id(void)
+SBE_ONE_DEF uint16_t aeron_archive_client_ping_sbe_template_id(void)
 {
-    return (uint16_t)3;
+    return (uint16_t)106;
 }
 
-SBE_ONE_DEF uint16_t aeron_archive_client_closeSessionRequest_sbe_schema_id(void)
+SBE_ONE_DEF uint16_t aeron_archive_client_ping_sbe_schema_id(void)
 {
     return (uint16_t)101;
 }
 
-SBE_ONE_DEF uint16_t aeron_archive_client_closeSessionRequest_sbe_schema_version(void)
+SBE_ONE_DEF uint16_t aeron_archive_client_ping_sbe_schema_version(void)
 {
     return (uint16_t)11;
 }
 
-SBE_ONE_DEF const char* aeron_archive_client_closeSessionRequest_sbe_semantic_version(void)
+SBE_ONE_DEF const char* aeron_archive_client_ping_sbe_semantic_version(void)
 {
     return "5.2";
 }
 
-SBE_ONE_DEF const char *aeron_archive_client_closeSessionRequest_sbe_semantic_type(void)
+SBE_ONE_DEF const char *aeron_archive_client_ping_sbe_semantic_type(void)
 {
     return "";
 }
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_offset(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_offset(
+    const struct aeron_archive_client_ping *const codec)
 {
     return codec->offset;
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_wrap_and_apply_header(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_wrap_and_apply_header(
+    struct aeron_archive_client_ping *const codec,
     char *buffer,
     const uint64_t offset,
     const uint64_t buffer_length,
@@ -266,46 +266,46 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
     aeron_archive_client_messageHeader_wrap(
         hdr, buffer + offset, 0, aeron_archive_client_messageHeader_sbe_schema_version(), buffer_length);
 
-    aeron_archive_client_messageHeader_set_blockLength(hdr, aeron_archive_client_closeSessionRequest_sbe_block_length());
-    aeron_archive_client_messageHeader_set_templateId(hdr, aeron_archive_client_closeSessionRequest_sbe_template_id());
-    aeron_archive_client_messageHeader_set_schemaId(hdr, aeron_archive_client_closeSessionRequest_sbe_schema_id());
-    aeron_archive_client_messageHeader_set_version(hdr, aeron_archive_client_closeSessionRequest_sbe_schema_version());
+    aeron_archive_client_messageHeader_set_blockLength(hdr, aeron_archive_client_ping_sbe_block_length());
+    aeron_archive_client_messageHeader_set_templateId(hdr, aeron_archive_client_ping_sbe_template_id());
+    aeron_archive_client_messageHeader_set_schemaId(hdr, aeron_archive_client_ping_sbe_schema_id());
+    aeron_archive_client_messageHeader_set_version(hdr, aeron_archive_client_ping_sbe_schema_version());
 
-    aeron_archive_client_closeSessionRequest_reset(
+    aeron_archive_client_ping_reset(
         codec,
         buffer + offset + aeron_archive_client_messageHeader_encoded_length(),
         0,
         buffer_length - aeron_archive_client_messageHeader_encoded_length(),
-        aeron_archive_client_closeSessionRequest_sbe_block_length(),
-        aeron_archive_client_closeSessionRequest_sbe_schema_version());
+        aeron_archive_client_ping_sbe_block_length(),
+        aeron_archive_client_ping_sbe_schema_version());
 
     return codec;
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_wrap_for_encode(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_wrap_for_encode(
+    struct aeron_archive_client_ping *const codec,
     char *buffer,
     const uint64_t offset,
     const uint64_t buffer_length)
 {
-    return aeron_archive_client_closeSessionRequest_reset(
+    return aeron_archive_client_ping_reset(
         codec,
         buffer,
         offset,
         buffer_length,
-        aeron_archive_client_closeSessionRequest_sbe_block_length(),
-        aeron_archive_client_closeSessionRequest_sbe_schema_version());
+        aeron_archive_client_ping_sbe_block_length(),
+        aeron_archive_client_ping_sbe_schema_version());
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_wrap_for_decode(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_wrap_for_decode(
+    struct aeron_archive_client_ping *const codec,
     char *buffer,
     const uint64_t offset,
     const uint64_t acting_block_length,
     const uint64_t acting_version,
     const uint64_t buffer_length)
 {
-    return aeron_archive_client_closeSessionRequest_reset(
+    return aeron_archive_client_ping_reset(
         codec,
         buffer,
         offset,
@@ -314,10 +314,10 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
         acting_version);
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_sbe_rewind(
-    struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_sbe_rewind(
+    struct aeron_archive_client_ping *const codec)
 {
-    return aeron_archive_client_closeSessionRequest_wrap_for_decode(
+    return aeron_archive_client_ping_wrap_for_decode(
         codec,
         codec->buffer,
         codec->offset,
@@ -326,100 +326,100 @@ SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_clien
         codec->buffer_length);
 }
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_encoded_length(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_encoded_length(
+    const struct aeron_archive_client_ping *const codec)
 {
-    return aeron_archive_client_closeSessionRequest_sbe_position(codec) - codec->offset;
+    return aeron_archive_client_ping_sbe_position(codec) - codec->offset;
 }
 
-SBE_ONE_DEF const char *aeron_archive_client_closeSessionRequest_buffer(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
-{
-    return codec->buffer;
-}
-
-SBE_ONE_DEF char *aeron_archive_client_closeSessionRequest_mut_buffer(
-    struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF const char *aeron_archive_client_ping_buffer(
+    const struct aeron_archive_client_ping *const codec)
 {
     return codec->buffer;
 }
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_buffer_length(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF char *aeron_archive_client_ping_mut_buffer(
+    struct aeron_archive_client_ping *const codec)
+{
+    return codec->buffer;
+}
+
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_buffer_length(
+    const struct aeron_archive_client_ping *const codec)
 {
     return codec->buffer_length;
 }
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_acting_version(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_acting_version(
+    const struct aeron_archive_client_ping *const codec)
 {
     return codec->acting_version;
 }
 
-SBE_ONE_DEF const char *aeron_archive_client_closeSessionRequest_controlSessionId_meta_attribute(
-    const enum aeron_archive_client_closeSessionRequest_meta_attribute attribute)
+SBE_ONE_DEF const char *aeron_archive_client_ping_controlSessionId_meta_attribute(
+    const enum aeron_archive_client_ping_meta_attribute attribute)
 {
     switch (attribute)
     {
-        case aeron_archive_client_closeSessionRequest_meta_attribute_EPOCH: return "";
-        case aeron_archive_client_closeSessionRequest_meta_attribute_TIME_UNIT: return "";
-        case aeron_archive_client_closeSessionRequest_meta_attribute_SEMANTIC_TYPE: return "";
-        case aeron_archive_client_closeSessionRequest_meta_attribute_PRESENCE: return "required";
+        case aeron_archive_client_ping_meta_attribute_EPOCH: return "";
+        case aeron_archive_client_ping_meta_attribute_TIME_UNIT: return "";
+        case aeron_archive_client_ping_meta_attribute_SEMANTIC_TYPE: return "";
+        case aeron_archive_client_ping_meta_attribute_PRESENCE: return "required";
     }
 
     return "";
 }
 
-SBE_ONE_DEF uint16_t aeron_archive_client_closeSessionRequest_controlSessionId_id(void)
+SBE_ONE_DEF uint16_t aeron_archive_client_ping_controlSessionId_id(void)
 {
     return 1;
 }
 
-SBE_ONE_DEF uint64_t aeron_archive_client_closeSessionRequest_controlSessionId_since_version(void)
+SBE_ONE_DEF uint64_t aeron_archive_client_ping_controlSessionId_since_version(void)
 {
     return 0;
 }
 
-SBE_ONE_DEF bool aeron_archive_client_closeSessionRequest_controlSessionId_in_acting_version(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF bool aeron_archive_client_ping_controlSessionId_in_acting_version(
+    const struct aeron_archive_client_ping *const codec)
 {
 #if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wtautological-compare"
 #endif
-    return codec->acting_version >= aeron_archive_client_closeSessionRequest_controlSessionId_since_version();
+    return codec->acting_version >= aeron_archive_client_ping_controlSessionId_since_version();
 #if defined(__clang__)
 #pragma clang diagnostic pop
 #endif
 }
 
-SBE_ONE_DEF size_t aeron_archive_client_closeSessionRequest_controlSessionId_encoding_offset(void)
+SBE_ONE_DEF size_t aeron_archive_client_ping_controlSessionId_encoding_offset(void)
 {
     return 0;
 }
 
-SBE_ONE_DEF int64_t aeron_archive_client_closeSessionRequest_controlSessionId_null_value(void)
+SBE_ONE_DEF int64_t aeron_archive_client_ping_controlSessionId_null_value(void)
 {
     return SBE_NULLVALUE_INT64;
 }
 
-SBE_ONE_DEF int64_t aeron_archive_client_closeSessionRequest_controlSessionId_min_value(void)
+SBE_ONE_DEF int64_t aeron_archive_client_ping_controlSessionId_min_value(void)
 {
     return INT64_C(-9223372036854775807);
 }
 
-SBE_ONE_DEF int64_t aeron_archive_client_closeSessionRequest_controlSessionId_max_value(void)
+SBE_ONE_DEF int64_t aeron_archive_client_ping_controlSessionId_max_value(void)
 {
     return INT64_C(9223372036854775807);
 }
 
-SBE_ONE_DEF size_t aeron_archive_client_closeSessionRequest_controlSessionId_encoding_length(void)
+SBE_ONE_DEF size_t aeron_archive_client_ping_controlSessionId_encoding_length(void)
 {
     return 8;
 }
 
-SBE_ONE_DEF int64_t aeron_archive_client_closeSessionRequest_controlSessionId(
-    const struct aeron_archive_client_closeSessionRequest *const codec)
+SBE_ONE_DEF int64_t aeron_archive_client_ping_controlSessionId(
+    const struct aeron_archive_client_ping *const codec)
 {
     int64_t val;
 #if defined(__GNUG__) && !defined(__clang__)
@@ -433,8 +433,8 @@ SBE_ONE_DEF int64_t aeron_archive_client_closeSessionRequest_controlSessionId(
     return SBE_LITTLE_ENDIAN_ENCODE_64(val);
 }
 
-SBE_ONE_DEF struct aeron_archive_client_closeSessionRequest *aeron_archive_client_closeSessionRequest_set_controlSessionId(
-    struct aeron_archive_client_closeSessionRequest *const codec,
+SBE_ONE_DEF struct aeron_archive_client_ping *aeron_archive_client_ping_set_controlSessionId(
+    struct aeron_archive_client_ping *const codec,
     const int64_t value)
 {
     int64_t val = SBE_LITTLE_ENDIAN_ENCODE_64(value);

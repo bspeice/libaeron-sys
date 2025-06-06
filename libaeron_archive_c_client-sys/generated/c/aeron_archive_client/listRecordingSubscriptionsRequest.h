@@ -237,7 +237,7 @@ SBE_ONE_DEF uint16_t aeron_archive_client_listRecordingSubscriptionsRequest_sbe_
 
 SBE_ONE_DEF uint16_t aeron_archive_client_listRecordingSubscriptionsRequest_sbe_schema_version(void)
 {
-    return (uint16_t)10;
+    return (uint16_t)11;
 }
 
 SBE_ONE_DEF const char* aeron_archive_client_listRecordingSubscriptionsRequest_sbe_semantic_version(void)
