@@ -1,6 +1,6 @@
 [package]
 name = "libaeron_archive_c_client-sys"
-version = "1.48.1"
+version = "1.48.2"
 authors = ["Bradlee Speice <bradlee@speice.io>"]
 repository = "https://github.com/bspeice/libaeron-sys"
 documentation = "https://docs.rs/libaeron_archive_c_client-sys"
@@ -12,7 +12,7 @@ edition = "2018"
 readme = "README.md"
 
 [dependencies]
-libaeron-sys = { version = "=1.48.1", path = "../libaeron-sys" }
+libaeron-sys = { version = "=1.48.2", path = "../libaeron-sys" }
 
 [build-dependencies]
 bindgen = "0.69"
