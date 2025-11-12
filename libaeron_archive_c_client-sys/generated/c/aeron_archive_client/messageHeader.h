@@ -212,7 +212,7 @@ SBE_ONE_DEF uint16_t aeron_archive_client_messageHeader_sbe_schema_id(void)
 
 SBE_ONE_DEF uint16_t aeron_archive_client_messageHeader_sbe_schema_version(void)
 {
-    return (uint16_t)11;
+    return (uint16_t)13;
 }
 
 SBE_ONE_DEF const char *aeron_archive_client_messageHeader_blockLength_meta_attribute(
