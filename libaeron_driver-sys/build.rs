@@ -61,7 +61,20 @@ pub fn main() {
         link_type.target_name()
     );
 
+    if let LinkType::Dynamic = link_type {
+        println!("cargo:rustc-link-lib=dylib=aeron");
+    }
+
     if let LinkType::Static = link_type {
+        // On Linux, Aeron links to uuid and libbsd if CMake finds them
+        if cfg!(target_os = "linux") {
+            if let Ok(_lib) = pkg_config::probe_library("uuid") {
+                println!("cargo:rustc-link-lib=uuid");
+            }
+            if let Ok(_lib) = pkg_config::probe_library("libbsd") {
+                println!("cargo:rustc-link-lib=bsd");
+            }
+        }
         // On Windows, there are some extra libraries needed for static link
         // that aren't included by Aeron.
         if cfg!(target_os = "windows") {
