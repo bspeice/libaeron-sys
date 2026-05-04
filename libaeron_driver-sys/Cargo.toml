@@ -12,6 +12,7 @@ edition = "2018"
 readme = "README.md"
 
 [dependencies]
+libaeron-sys = { version = "=1.51.0", path = "../libaeron-sys" }
 
 [build-dependencies]
 bindgen = "0.72"
@@ -20,4 +21,4 @@ dunce = "1.0"
 pkg-config = "0.3"
 
 [features]
-static = []
+static = ["libaeron-sys/static"]

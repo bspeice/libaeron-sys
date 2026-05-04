@@ -1,5 +1,5 @@
-use libaeron_driver_sys as client;
 use libaeron_driver_sys as driver;
+use libaeron_sys as client;
 use std::ffi::{c_int, CStr, CString};
 use std::os::raw::c_void;
 use std::ptr;
