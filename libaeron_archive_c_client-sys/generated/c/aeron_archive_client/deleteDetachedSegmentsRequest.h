@@ -10,6 +10,8 @@
 #include <limits.h>
 #define SBE_FLOAT_NAN NAN
 #define SBE_DOUBLE_NAN NAN
+#define SBE_FLOAT_INFINITY ((float)INFINITY)
+#define SBE_DOUBLE_INFINITY ((double)INFINITY)
 #include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
